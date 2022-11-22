@@ -22,7 +22,7 @@ class VecMulAddAccelModule(outer: VecMulAddAccel, w: Int=32,   n: Int = 4)(impli
     ctrl.io.rocc_rs2     <> io.cmd.bits.rs2
     ctrl.io.rocc_rd      <> io.cmd.bits.inst.rd
     ctrl.io.rocc_req_val <> io.cmd.valid
-    io.cmd.ready      :=  ctrl.io.rocc_req_rdy // := 
+    io.cmd.ready      :=  ctrl.io.rocc_req_rdy // := Assign connect just like wire.
     io.busy           :=  ctrl.io.busy
     io.resp.bits.data :=  ctrl.io.resp_data 
     io.resp.bits.rd   :=  ctrl.io.resp_rd   

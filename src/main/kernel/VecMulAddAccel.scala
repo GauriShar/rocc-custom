@@ -17,12 +17,12 @@ class VecMulAddAccelModule(outer: VecMulAddAccel, w: Int=32,   n: Int = 4)(impli
 	  // control
     val ctrl = Module(new KernelController(w,n) )
 
-    ctrl.io.rocc_funct   <> io.cmd.bits.inst.funct
+    ctrl.io.rocc_funct   <> io.cmd.bits.inst.funct // <> is used to bulk connect all of identically named ports between two modules like valid ready bits etc
     ctrl.io.rocc_rs1     <> io.cmd.bits.rs1
     ctrl.io.rocc_rs2     <> io.cmd.bits.rs2
     ctrl.io.rocc_rd      <> io.cmd.bits.inst.rd
     ctrl.io.rocc_req_val <> io.cmd.valid
-    io.cmd.ready      :=  ctrl.io.rocc_req_rdy 
+    io.cmd.ready      :=  ctrl.io.rocc_req_rdy // := 
     io.busy           :=  ctrl.io.busy
     io.resp.bits.data :=  ctrl.io.resp_data 
     io.resp.bits.rd   :=  ctrl.io.resp_rd   
